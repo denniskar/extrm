@@ -11,10 +11,12 @@ import pojos.SchemeTransactions;
 
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class lumpedStatement {
     static Font dark= new Font(Font.FontFamily.COURIER,10);
     static Font font= new Font(Font.FontFamily.HELVETICA,4);
+    static Font bold= new Font(Font.FontFamily.TIMES_ROMAN,5);
 
     public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans) {
         //public static final PdfNumber LANDSCAPE = new PdfNumber(90);
@@ -41,18 +43,25 @@ public class lumpedStatement {
             document.open();
 //				   Paragraph linebreak = new Paragraph("-------------------------------------------------------------------");
             Paragraph space = new Paragraph("   ");
-            Paragraph StatementType= new Paragraph("LumpedStatement");
-            Paragraph Surname = new Paragraph("Name:" + member.getSurname() + member.getOtherNames(), dark);
+            Paragraph StatementType= new Paragraph("LUMPED STATEMENT");
+            StatementType.setAlignment(Paragraph.ALIGN_CENTER);
+            Paragraph Surname = new Paragraph("Name:"+member.getFirstName() +" "+ member.getSurname() + " " +member.getOtherNames(), dark);
             Paragraph PhoneNo = new Paragraph("Phone Number:" + member.getPhoneNo(), dark);
             Paragraph idNo = new Paragraph("ID Number:" + member.getIdNo(), dark);
             Paragraph memberNo = new Paragraph("Member Number:" + member.getMemberNo(), dark);
+            memberNo.setAlignment(Paragraph.ALIGN_RIGHT);
             Paragraph payrollno = new Paragraph("Payroll Number:" + member.getPayrollNo(), dark);
+            payrollno.setAlignment(Paragraph.ALIGN_RIGHT);
+            Paragraph email =new Paragraph("Email Address:"+member.getEmailaddress(),dark);
+            email.setAlignment(Paragraph.ALIGN_RIGHT);
+
             document.add(StatementType);
             document.add(Surname);
-            document.add(payrollno);
             document.add(PhoneNo);
             document.add(idNo);
+            document.add(payrollno);
             document.add(memberNo);
+            document.add(email);
 //				   document.add(space);
 //				   document.add(space);
 //				   document.add(space);
@@ -69,6 +78,8 @@ public class lumpedStatement {
                 document.add(new Paragraph("Scheme:" +schemeTransaction.getScheme().getSchemeCode()+":"+schemeTransaction.getScheme().getSchemeName(), dark));
                 document.add(space);
 
+                double totals = 0.0;
+
                 for (int i = 0; i < schemeTransaction.getMemberStatements().size(); i++) {
                     MemberStatement statement = schemeTransaction.getMemberStatements().get(i);
                     table.addCell(new Phrase(statement.getDocument_Date(), font));
@@ -78,12 +89,24 @@ public class lumpedStatement {
                     table.addCell(new Phrase(statement.getShare_Dr(), font));
                     table.addCell(new Phrase(statement.getShare_Cr(), font));
                     table.addCell(new Phrase(statement.getRunningBalance(), font));
-                    table.addCell(new Phrase(statement.getShare_Dr(), font));
-                    table.addCell(new Phrase(statement.getShare_Dr(), font));
+                    table.addCell(new Phrase(statement.getLoan_Dr(), font));
+                    table.addCell(new Phrase(statement.getLoan_Cr(), font));
                     table.addCell(new Phrase(statement.getShare_Bal(), font));
+                    totals+=Double.parseDouble(statement.getRunningBalance());
+                    // document.add();
                 }
-
+                table.addCell(new Phrase("Totals:", bold));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase(String.valueOf(totals), bold));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
+                table.addCell(new Phrase("", font));
                 document.add(table);
+
 //                       document.add(space);
 
                 //document.add(linebreak);
@@ -95,26 +118,45 @@ public class lumpedStatement {
             document.add(space);
 
 
+
             for (LoanTransactions loanTransactions:memberLoans) {
                 PdfPTable tableLoans = createTable();
 
-                document.add(new Paragraph("Loan:" +loanTransactions.getLoansInService().getLoanSerialNumber(), dark));
+
+
+                document.add(new Paragraph("Loan:" + loanTransactions.getLoansInService().getLoanSerialNumber() + " " + loanTransactions.getLoanTypes().getLoanTypeName(), dark));
                 document.add(space);
 
+                AtomicReference<Double> loanTotals= new AtomicReference<>(0.0);
+                AtomicReference<Double> interestTotals= new AtomicReference<>(0.0);
                 loanTransactions.getMemberStatements().stream().forEach(statement -> {
                     tableLoans.addCell(new Phrase(statement.getDocument_Date(), font));
                     tableLoans.addCell(new Phrase(statement.getActivityRef(), font));
                     tableLoans.addCell(new Phrase(statement.getDocument_Number(), font));
                     tableLoans.addCell(new Phrase(statement.getPeference_Name(), font));
-                    tableLoans.addCell(new Phrase(statement.getShare_Dr(), font));
-                    tableLoans.addCell(new Phrase(statement.getShare_Cr(), font));
-                    tableLoans.addCell(new Phrase(statement.getShare_Bal(), font));
                     tableLoans.addCell(new Phrase(statement.getLoan_Dr(), font));
                     tableLoans.addCell(new Phrase(statement.getLoan_Cr(), font));
                     tableLoans.addCell(new Phrase(statement.getRunningBalance(), font));
+                    tableLoans.addCell(new Phrase(statement.getInterest_Dr(), font));
+                    tableLoans.addCell(new Phrase(statement.getInterest_Cr(), font));
+                    tableLoans.addCell(new Phrase(statement.getInterest_Bal(), font));
+                    loanTotals.updateAndGet(v -> new Double((double) (v + Double.parseDouble(statement.getRunningBalance()))));
+                    interestTotals.updateAndGet(v -> new Double((double) (v + Double.parseDouble(statement.getInterest_Bal()))));
                 });
 
+                tableLoans.addCell(new Phrase("Totals:", bold));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase(String.valueOf(loanTotals),bold));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase("", font));
+                tableLoans.addCell(new Phrase(String.valueOf(interestTotals), bold));
                 document.add(tableLoans);
+
+
             }
 
 

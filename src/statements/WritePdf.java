@@ -1,13 +1,9 @@
 package statements;
 
-import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
 import pojos.*;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Font;
 
 
@@ -18,6 +14,8 @@ public class WritePdf {
 //	String statementNo = myObj.nextLine();
     static Font dark = new Font(Font.FontFamily.COURIER, 10);
     static Font font = new Font(Font.FontFamily.HELVETICA, 4);
+    static Font bold= new Font(Font.FontFamily.TIMES_ROMAN,5);
+
 
     public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans) {
         //public static final PdfNumber LANDSCAPE = new PdfNumber(90);
@@ -29,11 +27,12 @@ public class WritePdf {
 
         if (statementNo == 1) {
 
-            boolean b = MainStatementReport.writePdf(schemeTransactions, member, memberLoans);
+            boolean b = MainStatement.writePdf(schemeTransactions, member, memberLoans);
             return b;
 
         }else if(statementNo == 2){
-            boolean b = detailedInsuranceStatement.writePdf(schemeTransactions, member, memberLoans);
+
+            boolean b = DetailedInsuranceStatement.writePdf(schemeTransactions, member, memberLoans);
             return  b;
         }
         else if(statementNo == 3){

@@ -6,7 +6,15 @@ public class LoanTransactions {
 
     private List<MemberStatement> memberStatements;
     private LoansInService loansInService;
+    private LoanTypes loanTypes;
 
+    public LoanTypes getLoanTypes() {
+        return loanTypes;
+    }
+
+    public void setLoanTypes(LoanTypes loanTypes) {
+        this.loanTypes = loanTypes;
+    }
 
     public List<MemberStatement> getMemberStatements() {
         return memberStatements;

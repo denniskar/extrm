@@ -38,6 +38,8 @@ public class Utils {
 	        	   member.setPhoneNo(rs.getString("PhoneNo"));
 	        	   member.setSurname(rs.getString("Surname"));
 	        	   member.setOtherNames(rs.getString("OtherNames"));
+	        	   member.setFirstName(rs.getString("FirstName"));
+	        	   member.setEmailaddress(rs.getString("EmailAddress"));
 	        	   
 	        	   
 	           }
@@ -96,6 +98,32 @@ public class Utils {
 
 	    }
 
+	public static  LoanTypes fetchLoanType(String identifier){
+		Connection mainConn = null;
+		try {
+			mainConn = obJBDCConnection.getConnection("main");
+
+			java.sql.Statement statement = mainConn.createStatement();
+			// Result set get the result of the SQL query
+			ResultSet resultSet = statement
+					.executeQuery("select * from loantypes where LoanSerialIdentifier ='"+identifier+"'");
+
+			LoanTypes loanTypes = new LoanTypes();
+			while (resultSet.next()) {
+				loanTypes.setLoanTypeName(resultSet.getString("LoanTypeName"));
+				loanTypes.setLoanTypeCode(resultSet.getString("LoanTypeCode"));
+			}
+			resultSet.close();
+			statement.close();
+			return  loanTypes;
+
+		}catch (Exception e){
+			e.printStackTrace();
+			return  new LoanTypes();
+		}
+	}
+
+
 
 	public static  List<LoansInService> fetchMemberLoanInService(Member member){
 		Connection mainConn = null;
@@ -139,11 +167,16 @@ public class Utils {
 			for (LoansInService loansInService:loansInServices) {
 
 				System.out.println(loansInService);
+				LoanTypes loanTypes = Utils.fetchLoanType(loansInService.getLoanType());
 				List<MemberStatement> loansStatements = fetchActualLoan(connectionbosa000010, loansInService, member);
+
 				LoanTransactions loanTransaction = new LoanTransactions();
 				loanTransaction.setLoansInService(loansInService);
+				loanTransaction.setLoanTypes(loanTypes);
 				loanTransaction.setMemberStatements(loansStatements);
 				loanTransactions.add(loanTransaction);
+
+
 			}
 
 			return  loanTransactions;

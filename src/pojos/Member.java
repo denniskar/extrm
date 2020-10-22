@@ -1,14 +1,31 @@
 package pojos;
 
 public class Member {
+	private  String FirstName;
 	private String OtherNames;
 	private  String Surname;
 	private  String PhoneNo ;
 	private  String payrollNo;
 	private String memberNo;
 	private String idNo;
-	
-	
+	private String emailaddress;
+
+	public String getFirstName() {
+		return FirstName;
+	}
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+	public String getEmailaddress() {
+		return emailaddress;
+	}
+
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress;
+	}
+
 	public String getOtherNames() {
 		return OtherNames;
 	}

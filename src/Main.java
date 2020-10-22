@@ -18,12 +18,11 @@ public class Main {
 
             String payroll = myObj.nextLine();
 
-            Member member = Utils.fetchMember(payroll);
+           Member member = Utils.fetchMember(payroll);
 
             if(member != null) {
                 List<SchemeTransactions> schemeTransactions = new ArrayList<>();
 
-                List<LoanTransactions> memberLoans = new ArrayList<>();
                 for (Scheme scheme : Utils.fetchSchemes()) {
                     List<MemberStatement> memberStatements = Utils.fetchMemberStatement(scheme.getSchemeCode(), member);
 
@@ -63,8 +62,7 @@ public class Main {
 
                 }
 
-                memberLoans= Utils.fetchMemberLoans(member,"10");
-
+                List<LoanTransactions> memberLoans= Utils.fetchMemberLoans(member,"10");
 
                 if (WritePdf.writePdf(schemeTransactions, member, memberLoans)) {
                     System.out.println("Document Generated !!!! ");

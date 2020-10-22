@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="itextpdf-5.5.13.2">
+  <library name="itextpdf-5.5.13.21">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../catho/itextpdf-5.5.13.2.jar!/" />
     </CLASSES>

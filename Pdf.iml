@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
-    <libelement value="file://D:/catho/jar_files/itextpdf-5.5.9.jar" />
-    <libelement value="file://D:/catho/mysql-connector-java-5.1.9.jar" />
+    <libelement value="file://$MODULE_DIR$/../../catho/jar_files/itextpdf-5.5.9.jar" />
+    <libelement value="file://$MODULE_DIR$/../../catho/mysql-connector-java-5.1.9.jar" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -14,11 +14,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="14" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="itextpdf-5.5.9.jar">
         <CLASSES>
-          <root url="file://D:/catho/jar_files/itextpdf-5.5.9.jar" />
+          <root url="file://$MODULE_DIR$/../../catho/jar_files/itextpdf-5.5.9.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -27,13 +27,14 @@
     <orderEntry type="module-library" exported="">
       <library name="mysql-connector-java-5.1.9.jar">
         <CLASSES>
-          <root url="file://D:/catho/mysql-connector-java-5.1.9.jar" />
+          <root url="file://$MODULE_DIR$/../../catho/mysql-connector-java-5.1.9.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="library" name="itextpdf-5.5.13.2" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.21" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.9" level="project" />
+    <orderEntry type="library" name="itextpdf-5.5.13.21" level="project" />
   </component>
 </module>
