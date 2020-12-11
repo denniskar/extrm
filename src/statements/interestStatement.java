@@ -4,10 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import pojos.LoanTransactions;
-import pojos.Member;
-import pojos.MemberStatement;
-import pojos.SchemeTransactions;
+import pojos.*;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -17,7 +14,7 @@ public class interestStatement {
     static Font dark= new Font(Font.FontFamily.COURIER,10);
     static Font font= new Font(Font.FontFamily.HELVETICA,4);
     static Font bold= new Font(Font.FontFamily.TIMES_ROMAN,5);
-    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans) {
+    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans, Companydetails companydetails) {
         //public static final PdfNumber LANDSCAPE = new PdfNumber(90);
 
         Document document=new Document();

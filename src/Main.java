@@ -19,7 +19,7 @@ public class Main {
             String payroll = myObj.nextLine();
 
            Member member = Utils.fetchMember(payroll);
-
+           Companydetails companydetails=Utils.fetchcompanydetails("10");
             if(member != null) {
                 List<SchemeTransactions> schemeTransactions = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class Main {
 
                 List<LoanTransactions> memberLoans= Utils.fetchMemberLoans(member,"10");
 
-                if (WritePdf.writePdf(schemeTransactions, member, memberLoans)) {
+                if (WritePdf.writePdf(schemeTransactions, member, memberLoans,companydetails)) {
                     System.out.println("Document Generated !!!! ");
                 }else{
                     System.out.println("Document  Not Generated !!!! ");

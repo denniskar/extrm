@@ -19,33 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b55c43-da28-4ff8-8152-0284f6afdf79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/itextpdf_5_5_13_21.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pojos/LoanTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/itextpdf_5_5_13_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/itextpdf_5_5_13_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_21.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="13b55c43-da28-4ff8-8152-0284f6afdf79" name="Default Changelist" comment="final copy">
+      <change afterPath="$PROJECT_DIR$/src/pojos/Companydetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pdf.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pdf.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Connector/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Connector/DBConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pojos/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/pojos/Member.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pojos/MemberLoan.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/pojos/MemberLoan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/pojos/MemberStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/pojos/MemberStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/statements/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/statements/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/statements/WritePdf.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/statements/WritePdf.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/statements/WritePdf.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pojos/LoanTransactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pojos/LoanTransactions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pojos/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pojos/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statements/CombinedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/CombinedStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/statements/MainStatementReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/DetailedInsuranceStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/DetailedInsuranceStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/DetailedInsuranceStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/MainStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/MainStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statements/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statements/WritePdf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/WritePdf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/statements/detailedInsuranceStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/MainStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statements/insuranceStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/insuranceStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statements/interestStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/interestStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/statements/lumpedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/lumpedStatement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +67,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../catho/itextpdf-5.5.13.2.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pdf" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -141,6 +127,14 @@
       <option name="presentableId" value="Default" />
       <updated>1601542896918</updated>
     </task>
+    <task id="LOCAL-00001" summary="final copy">
+      <created>1603354816381</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603354816381</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,6 +149,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="final copy" />
+    <option name="LAST_COMMIT_MESSAGE" value="final copy" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="121" y="0" key="#Project_Structure" timestamp="1603283088240">
       <screen x="0" y="0" width="1280" height="689" />
@@ -164,26 +162,27 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="446" y="29" key="#com.intellij.ide.util.MemberChooser/0.0.1280.689@0.0.1280.689" timestamp="1603348125787" />
-    <state x="348" y="86" key="FileChooserDialogImpl" timestamp="1603282696014">
-      <screen x="0" y="0" width="1280" height="689" />
+    <state x="522" y="131" key="FileChooserDialogImpl" timestamp="1607688790178">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="348" y="86" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1603282696014" />
-    <state width="1237" height="116" key="GridCell.Tab.0.bottom" timestamp="1603354192979">
+    <state x="522" y="131" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1607688790178" />
+    <state width="1237" height="199" key="GridCell.Tab.0.bottom" timestamp="1605704575281">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="116" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1603354192979" />
-    <state width="1237" height="116" key="GridCell.Tab.0.center" timestamp="1603354192978">
+    <state width="1237" height="199" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1605704575281" />
+    <state width="1237" height="199" key="GridCell.Tab.0.center" timestamp="1605704575281">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="116" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1603354192978" />
-    <state width="1237" height="116" key="GridCell.Tab.0.left" timestamp="1603354192978">
+    <state width="1237" height="199" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1605704575281" />
+    <state width="1237" height="199" key="GridCell.Tab.0.left" timestamp="1605704575280">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="116" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1603354192978" />
-    <state width="1237" height="116" key="GridCell.Tab.0.right" timestamp="1603354192979">
+    <state width="1237" height="199" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1605704575280" />
+    <state width="1237" height="199" key="GridCell.Tab.0.right" timestamp="1605704575281">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="116" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1603354192979" />
+    <state width="1237" height="199" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1605704575281" />
     <state width="1237" height="208" key="GridCell.Tab.1.bottom" timestamp="1603283323651">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -204,9 +203,13 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="121" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1603351210499" />
-    <state x="450" y="259" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603354280165">
+    <state x="233" y="78" key="Vcs.Push.Dialog.v2" timestamp="1603354828678">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="450" y="259" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.689@0.0.1280.689" timestamp="1603354280165" />
+    <state x="233" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.689@0.0.1280.689" timestamp="1603354828678" />
+    <state x="450" y="259" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603354624328">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="450" y="259" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.689@0.0.1280.689" timestamp="1603354624328" />
   </component>
 </project>

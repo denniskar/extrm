@@ -40,6 +40,7 @@ public class Utils {
 	        	   member.setOtherNames(rs.getString("OtherNames"));
 	        	   member.setFirstName(rs.getString("FirstName"));
 	        	   member.setEmailaddress(rs.getString("EmailAddress"));
+	        	   member.setHomeaddress(rs.getString("HomeAddress"));
 	        	   
 	        	   
 	           }
@@ -59,6 +60,45 @@ public class Utils {
 		}
 		
 		
+	}
+
+	public static  Companydetails fetchcompanydetails (String payrollNo) throws SQLException {
+		try {
+			Connection connMain=obJBDCConnection.getConnection("main");
+
+			Companydetails companydetails = new Companydetails();
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+
+			String query="select * from companysettings ";
+			ps=connMain.prepareStatement(query);
+			rs=ps.executeQuery();
+			while (rs.next()){
+
+
+				companydetails.setCompanyName (rs.getString("CompanyName"));
+				companydetails.setAddress1 (rs.getString("Address1"));
+				companydetails.setTown(rs.getString("Town"));
+
+
+
+			}
+			rs.close();
+			ps.close();
+			connMain.close();
+
+
+
+
+
+			return companydetails;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+
 	}
 	
 
@@ -296,7 +336,59 @@ public class Utils {
 			Statement statement = bosa00001Conn.createStatement();
 			// Result set get the result of the SQL query
 			ResultSet resultSet = statement.executeQuery(
-                              "SELECT * FROM (  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr  FROM bosa000010.MEM_STATEMENT01 AS A01 LEFT JOIN Main.SavingSchemes AS SS ON A01.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A01.Employer_Code=TblAdv.EmployerNo AND A01.Payroll_no=TblAdv.PayrollNo AND A01.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A01.Share_Dr <> 0 or A01.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A01.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT02 AS A02 LEFT JOIN Main.SavingSchemes AS SS ON A02.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A02.Employer_Code=TblAdv.EmployerNo AND A02.Payroll_no=TblAdv.PayrollNo AND A02.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A02.Share_Dr <> 0 or A02.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A02.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT03 AS A03 LEFT JOIN Main.SavingSchemes AS SS ON A03.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A03.Employer_Code=TblAdv.EmployerNo AND A03.Payroll_no=TblAdv.PayrollNo AND A03.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A03.Share_Dr <> 0 or A03.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A03.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT04 AS A04 LEFT JOIN Main.SavingSchemes AS SS ON A04.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A04.Employer_Code=TblAdv.EmployerNo AND A04.Payroll_no=TblAdv.PayrollNo AND A04.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A04.Share_Dr <> 0 or A04.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A04.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT05 AS A05 LEFT JOIN Main.SavingSchemes AS SS ON A05.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A05.Employer_Code=TblAdv.EmployerNo AND A05.Payroll_no=TblAdv.PayrollNo AND A05.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A05.Share_Dr <> 0 or A05.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A05.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT06 AS A06 LEFT JOIN Main.SavingSchemes AS SS ON A06.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A06.Employer_Code=TblAdv.EmployerNo AND A06.Payroll_no=TblAdv.PayrollNo AND A06.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A06.Share_Dr <> 0 or A06.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A06.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT07 AS A07 LEFT JOIN Main.SavingSchemes AS SS ON A07.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A07.Employer_Code=TblAdv.EmployerNo AND A07.Payroll_no=TblAdv.PayrollNo AND A07.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A07.Share_Dr <> 0 or A07.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A07.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT08 AS A08 LEFT JOIN Main.SavingSchemes AS SS ON A08.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A08.Employer_Code=TblAdv.EmployerNo AND A08.Payroll_no=TblAdv.PayrollNo AND A08.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A08.Share_Dr <> 0 or A08.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A08.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT09 AS A09 LEFT JOIN Main.SavingSchemes AS SS ON A09.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A09.Employer_Code=TblAdv.EmployerNo AND A09.Payroll_no=TblAdv.PayrollNo AND A09.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A09.Share_Dr <> 0 or A09.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A09.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT10 AS A10 LEFT JOIN Main.SavingSchemes AS SS ON A10.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A10.Employer_Code=TblAdv.EmployerNo AND A10.Payroll_no=TblAdv.PayrollNo AND A10.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A10.Share_Dr <> 0 or A10.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A10.Scheme IN ('"+schemeCode+"')) AS tblx  ORDER BY Document_Date,SysCode ASC;"
+                              "SELECT * FROM (  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period," +
+									  "Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) " +
+									  "AS Contr  FROM bosa000010.MEM_STATEMENT01 AS A01 LEFT JOIN Main.SavingSchemes AS SS ON A01.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise " +
+									  "AS TblAdv ON A01.Employer_Code=TblAdv.EmployerNo AND A01.Payroll_no=TblAdv.PayrollNo AND A01.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' " +
+									  "AND Payroll_No='"+member.getPayrollNo()+"') AND (A01.Share_Dr <> 0 or A01.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A01.Scheme IN ('"+schemeCode+"') " +
+									  " UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 " +
+									  "AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice)" +
+									  " AS Contr FROM bosa000010.MEM_STATEMENT02 AS A02 LEFT JOIN Main.SavingSchemes AS SS ON A02.Scheme=SS.SchemeCode " +
+									  "LEFT JOIN Main.SharesAdvise AS TblAdv ON A02.Employer_Code=TblAdv.EmployerNo AND A02.Payroll_no=TblAdv.PayrollNo AND A02.Scheme=TblAdv.SchemeCode " +
+									  "WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A02.Share_Dr <> 0 or A02.Share_Cr <> 0)  " +
+									  "AND SS.IsWelfare = 'N'  AND A02.Scheme IN ('"+schemeCode+"')  UNION ALL  " +
+									  "SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS" +
+									  " Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT03 AS A03 " +
+									  "LEFT JOIN Main.SavingSchemes AS SS ON A03.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A03.Employer_Code=TblAdv.EmployerNo " +
+									  "AND A03.Payroll_no=TblAdv.PayrollNo AND A03.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') " +
+									  "AND (A03.Share_Dr <> 0 or A03.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A03.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode," +
+									  "Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 " +
+									  "AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT04" +
+									  " AS A04 LEFT JOIN Main.SavingSchemes AS SS ON A04.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A04.Employer_Code=TblAdv.EmployerNo " +
+									  "AND A04.Payroll_no=TblAdv.PayrollNo AND A04.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') " +
+									  "AND (A04.Share_Dr <> 0 or A04.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A04.Scheme IN ('"+schemeCode+"')  " +
+									  "UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 " +
+									  "AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr " +
+									  "FROM bosa000010.MEM_STATEMENT05 AS A05 LEFT JOIN Main.SavingSchemes AS SS ON A05.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS " +
+									  "TblAdv ON A05.Employer_Code=TblAdv.EmployerNo AND A05.Payroll_no=TblAdv.PayrollNo AND A05.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND" +
+									  " Payroll_No='"+member.getPayrollNo()+"') AND (A05.Share_Dr <> 0 or A05.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A05.Scheme IN ('"+schemeCode+"') " +
+									  " UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 " +
+									  "AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM " +
+									  "bosa000010.MEM_STATEMENT06 AS A06 LEFT JOIN Main.SavingSchemes AS SS ON A06.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS " +
+									  "TblAdv ON A06.Employer_Code=TblAdv.EmployerNo AND A06.Payroll_no=TblAdv.PayrollNo AND A06.Scheme=TblAdv.SchemeCode " +
+									  "WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A06.Share_Dr <> 0 or A06.Share_Cr <> 0) " +
+									  " AND SS.IsWelfare = 'N'  AND A06.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number," +
+									  "Document_Date,ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR " +
+									  "TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT07 AS A07 LEFT JOIN Main.SavingSchemes " +
+									  "AS SS ON A07.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A07.Employer_Code=TblAdv.EmployerNo AND A07.Payroll_no=TblAdv.PayrollNo" +
+									  " AND A07.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A07.Share_Dr <> 0 or A07.Share_Cr <> 0) " +
+									  " AND SS.IsWelfare = 'N'  AND A07.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date," +
+									  "ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR " +
+									  "TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT08 AS A08 LEFT JOIN Main.SavingSchemes AS SS " +
+									  "ON A08.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A08.Employer_Code=TblAdv.EmployerNo AND A08.Payroll_no=TblAdv.PayrollNo AND " +
+									  "A08.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A08.Share_Dr <> 0 or A08.Share_Cr <> 0)  " +
+									  "AND SS.IsWelfare = 'N'  AND A08.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date," +
+									  "ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName,IF(TblAdv.Advice IS NULL OR " +
+									  "TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT09 AS A09 LEFT JOIN Main.SavingSchemes AS SS ON " +
+									  "A09.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A09.Employer_Code=TblAdv.EmployerNo AND A09.Payroll_no=TblAdv.PayrollNo AND " +
+									  "A09.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') AND (A09.Share_Dr <> 0 or A09.Share_Cr <> 0)  " +
+									  "AND SS.IsWelfare = 'N'  AND A09.Scheme IN ('"+schemeCode+"')  UNION ALL  SELECT SysCode,Employer_Code,Payroll_No,Document_Number,Document_Date," +
+									  "ActivityRef,Reference_Name,Period,Share_Dr,Share_Cr,Scheme,0 AS Share,0 AS Deposit,SS.SchemeName," +
+									  "IF(TblAdv.Advice IS NULL OR TblAdv.Advice=0,SS.Contribution,TblAdv.Advice) AS Contr FROM bosa000010.MEM_STATEMENT10 AS A10 LEFT " +
+									  "JOIN Main.SavingSchemes AS SS ON A10.Scheme=SS.SchemeCode LEFT JOIN Main.SharesAdvise AS TblAdv ON A10.Employer_Code=TblAdv.EmployerNo " +
+									  "AND A10.Payroll_no=TblAdv.PayrollNo AND A10.Scheme=TblAdv.SchemeCode WHERE (Employer_Code='001' AND Payroll_No='"+member.getPayrollNo()+"') " +
+									  "AND (A10.Share_Dr <> 0 or A10.Share_Cr <> 0)  AND SS.IsWelfare = 'N'  AND A10.Scheme IN ('"+schemeCode+"')) AS tblx  ORDER BY Document_Date,SysCode" +
+									  " ASC;"
 
 
 					);

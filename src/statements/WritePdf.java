@@ -17,7 +17,7 @@ public class WritePdf {
     static Font bold= new Font(Font.FontFamily.TIMES_ROMAN,5);
 
 
-    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans) {
+    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans,Companydetails companydetails) {
         //public static final PdfNumber LANDSCAPE = new PdfNumber(90);
 
 
@@ -27,24 +27,24 @@ public class WritePdf {
 
         if (statementNo == 1) {
 
-            boolean b = MainStatement.writePdf(schemeTransactions, member, memberLoans);
+            boolean b = MainStatement.writePdf(schemeTransactions, member, memberLoans,companydetails);
             return b;
 
         }else if(statementNo == 2){
 
-            boolean b = DetailedInsuranceStatement.writePdf(schemeTransactions, member, memberLoans);
+            boolean b = DetailedInsuranceStatement.writePdf(schemeTransactions, member, memberLoans,companydetails);
             return  b;
         }
         else if(statementNo == 3){
-            boolean b = CombinedStatement.writePdf(schemeTransactions, member, memberLoans);
+            boolean b = CombinedStatement.writePdf(schemeTransactions, member, memberLoans,companydetails);
             return  b;
         }
         else if(statementNo == 4){
-            boolean b= insuranceStatement.writePdf(schemeTransactions, member, memberLoans);
+            boolean b= insuranceStatement.writePdf(schemeTransactions, member, memberLoans,companydetails);
             return  b;
         }
         else if(statementNo == 5){
-            boolean b = interestStatement.writePdf(schemeTransactions, member, memberLoans);
+            boolean b = interestStatement.writePdf(schemeTransactions, member, memberLoans,companydetails);
             return  b;
         }
         else{

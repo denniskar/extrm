@@ -9,6 +9,15 @@ public class Member {
 	private String memberNo;
 	private String idNo;
 	private String emailaddress;
+	private String Homeaddress;
+
+	public String getHomeaddress() {
+		return Homeaddress;
+	}
+
+	public void setHomeaddress(String homeaddress) {
+		Homeaddress = homeaddress;
+	}
 
 	public String getFirstName() {
 		return FirstName;

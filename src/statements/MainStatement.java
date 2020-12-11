@@ -5,10 +5,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Chunk;
-import pojos.LoanTransactions;
-import pojos.Member;
-import pojos.MemberStatement;
-import pojos.SchemeTransactions;
+import pojos.*;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -19,12 +16,12 @@ public class MainStatement {
     static Font font= new Font(Font.FontFamily.HELVETICA,4);
     static Font bold= new Font(Font.FontFamily.TIMES_ROMAN,6);
 
-    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans) {
+    public static boolean writePdf(List<SchemeTransactions> schemeTransactions, Member member, List<LoanTransactions> memberLoans, Companydetails companydetails) {
         //public static final PdfNumber LANDSCAPE = new PdfNumber(90);
 
         Document document=new Document();
         Rectangle rect =new Rectangle(PageSize.A4);
-        rect.setBackgroundColor(new BaseColor(22, 233, 233));
+        rect.setBackgroundColor(new BaseColor(254, 254, 254));
         document.setPageSize(rect);
 
 
@@ -44,8 +41,10 @@ public class MainStatement {
             document.open();
 //				   Paragraph linebreak = new Paragraph("-------------------------------------------------------------------");
             Paragraph space = new Paragraph("   ");
-            Paragraph StatementType= new Paragraph("MAIN STATEMENT");
+            Paragraph StatementType= new Paragraph("MAIN STATEMENT",dark);
             StatementType.setAlignment(Paragraph.ALIGN_CENTER);
+            Paragraph name=new Paragraph(companydetails.getCompanyName());
+            Paragraph saccoName=new Paragraph (companydetails.getAddress1()+" "+companydetails.getTown(),dark);
             Paragraph Surname = new Paragraph("Name:"+member.getFirstName() +" "+ member.getSurname() + " " +member.getOtherNames(), dark);
             Paragraph PhoneNo = new Paragraph("Phone Number:" + member.getPhoneNo(), dark);
             Paragraph idNo = new Paragraph("ID Number:" + member.getIdNo(), dark);
@@ -55,14 +54,18 @@ public class MainStatement {
             payrollno.setAlignment(Paragraph.ALIGN_RIGHT);
             Paragraph email =new Paragraph("Email Address:"+member.getEmailaddress(),dark);
             email.setAlignment(Paragraph.ALIGN_RIGHT);
-
+            Paragraph homeaddress=new Paragraph ("Mem.Address"+member.getHomeaddress(),dark);
+            homeaddress.setAlignment(Paragraph.ALIGN_RIGHT);
             document.add(StatementType);
+            document.add(name);
+            document.add(saccoName);
             document.add(Surname);
             document.add(PhoneNo);
             document.add(idNo);
             document.add(payrollno);
             document.add(memberNo);
             document.add(email);
+            document.add(homeaddress);
 //				   document.add(space);
 //				   document.add(space);
 //				   document.add(space);
@@ -80,6 +83,8 @@ public class MainStatement {
                 document.add(space);
 
                 double totals = 0.0;
+
+
 
                 for (int i = 0; i < schemeTransaction.getMemberStatements().size(); i++) {
                     MemberStatement statement = schemeTransaction.getMemberStatements().get(i);
@@ -157,10 +162,12 @@ public class MainStatement {
 
 
             }
-
+            Paragraph linebreak = new Paragraph("SAVE REGULARLY BORROW WISELY REPAY PROMPTLY ",dark);
+            linebreak.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(linebreak);
 
             document.close();
-            System.out.println("finished");
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,44 +182,44 @@ public class MainStatement {
 
         PdfPCell c1 = new PdfPCell(new Phrase("Date", font));
         c1.setColspan(1);
-        c1.setBackgroundColor(new BaseColor(104, 236, 234));
+        c1.setBackgroundColor(new BaseColor(254, 254, 254));
         c1.setFixedHeight((float) 0.1);
         table.addCell(c1);
         PdfPCell c11 = new PdfPCell(new Phrase("Activity", font));
-        c11.setBackgroundColor(new BaseColor(78, 89, 0));
+        c11.setBackgroundColor(new BaseColor(254, 254, 254));
         c11.setColspan(1);
         table.addCell(c11);
         PdfPCell c12 = new PdfPCell(new Phrase("DocumentNo", font));
-        c12.setBackgroundColor(new BaseColor(78, 89, 0));
+        c12.setBackgroundColor(new BaseColor(254, 254, 254));
         c12.setColspan(1);
         table.addCell(c12);
 
         PdfPCell c14 = new PdfPCell(new Phrase("Description", font));
-        c14.setBackgroundColor(new BaseColor(78, 89, 0));
+        c14.setBackgroundColor(new BaseColor(254, 254, 254));
         c14.setColspan(1);
         table.addCell(c14);
         PdfPCell c13 = new PdfPCell(new Phrase("PaidIn", font));
-        c13.setBackgroundColor(new BaseColor(78, 89, 0));
+        c13.setBackgroundColor(new BaseColor(254, 254, 254));
         c13.setColspan(1);
         table.addCell(c13);
         PdfPCell c15 = new PdfPCell(new Phrase("PaidOut", font));
-        c15.setBackgroundColor(new BaseColor(78, 89, 0));
+        c15.setBackgroundColor(new BaseColor(254, 254, 254));
         c15.setColspan(1);
         table.addCell(c15);
         PdfPCell c16 = new PdfPCell(new Phrase("Running Bal", font));
-        c16.setBackgroundColor(new BaseColor(78, 89, 0));
+        c16.setBackgroundColor(new BaseColor(254, 254, 254));
         c16.setColspan(1);
         table.addCell(c16);
         PdfPCell c17 = new PdfPCell(new Phrase("(Int)PaidIn", font));
-        c17.setBackgroundColor(new BaseColor(78, 89, 0));
+        c17.setBackgroundColor(new BaseColor(254, 254, 254));
         c17.setColspan(1);
         table.addCell(c17);
         PdfPCell c18 = new PdfPCell(new Phrase("(Int)PaidOut", font));
-        c18.setBackgroundColor(new BaseColor(78, 89, 0));
+        c18.setBackgroundColor(new BaseColor(254, 254, 254));
         c18.setColspan(1);
         table.addCell(c18);
         PdfPCell c19 = new PdfPCell(new Phrase("Running Bal", font));
-        c19.setBackgroundColor(new BaseColor(78, 89, 0));
+        c19.setBackgroundColor(new BaseColor(254, 254, 254));
         c19.setColspan(1);
         table.addCell(c19);
 
